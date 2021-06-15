@@ -20,7 +20,7 @@ async function main() {
         let runID = core.getInput("run_id")
         let runNumber = core.getInput("run_number")
         
-        console.log(token)
+        console.log("===> Token:", token)
 
         const client = github.getOctokit(token)
 

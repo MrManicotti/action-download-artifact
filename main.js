@@ -7,7 +7,7 @@ const fs = require('fs')
 
 async function main() {
     try {
-        const token = core.getInput("github_token", { required: true })
+        const test = core.getInput("test", { required: true })
         const workflow = core.getInput("workflow", { required: true })
         const [owner, repo] = core.getInput("repo", { required: true }).split("/")
         const path = core.getInput("path", { required: true })
@@ -20,9 +20,9 @@ async function main() {
         let runID = core.getInput("run_id")
         let runNumber = core.getInput("run_number")
         
-        console.log("===> Token:", token)
+        console.log("===> Token:", test)
 
-        const client = github.getOctokit(token)
+        const client = github.getOctokit(test)
 
         console.log("==> Workflow:", workflow)
 

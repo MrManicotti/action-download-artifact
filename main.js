@@ -7,7 +7,7 @@ const fs = require('fs')
 
 async function main() {
     try {
-        const test = core.getInput("test", { required: true })
+        const token = core.getInput("github_token", { required: true })
         const workflow = core.getInput("workflow", { required: true })
         const [owner, repo] = core.getInput("repo", { required: true }).split("/")
         const path = core.getInput("path", { required: true })
@@ -20,9 +20,9 @@ async function main() {
         let runID = core.getInput("run_id")
         let runNumber = core.getInput("run_number")
         
-        console.log("===> Token:", test)
+        console.log("===> Token:", token)
 
-        const client = github.getOctokit(test)
+        const client = github.getOctokit(token)
 
         console.log("==> Workflow:", workflow)
 
@@ -68,6 +68,7 @@ async function main() {
                 status: workflowConclusion,
             }
             )) {
+                console.log("71")
                 const run = runs.data.find(r => {
                     if (commit) {
                         return r.head_sha == commit
@@ -77,6 +78,8 @@ async function main() {
                     }
                     return true
                 })
+                
+                console.log("81:",run)
 
                 if (run) {
                     runID = run.id
@@ -92,6 +95,8 @@ async function main() {
             repo: repo,
             run_id: runID,
         })
+        
+        console.log("98:",artifacts)
 
         // One artifact or all if `name` input is not specified.
         if (name) {

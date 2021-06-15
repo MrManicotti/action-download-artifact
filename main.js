@@ -19,6 +19,8 @@ async function main() {
         let event = core.getInput("event")
         let runID = core.getInput("run_id")
         let runNumber = core.getInput("run_number")
+        
+        console.log(token)
 
         const client = github.getOctokit(token)
 
